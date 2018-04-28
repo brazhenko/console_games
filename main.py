@@ -2,6 +2,7 @@ class Field(object):
     turn_positions = [' ', ' ', ' ',
                       ' ', ' ', ' ',
                       ' ', ' ', ' ']
+
     turn_counts = 0
 
     def is_game_finished(self, a=turn_positions, i=turn_counts):
@@ -28,21 +29,31 @@ class Field(object):
         else:
             return '', False
 
+    def make_turn(self):
+        if self.turn_counts % 2 == 1:
+            print('Играют: ООО')
+            sell = int(input())
+            if 0<sell<9 and self.turn_positions[sell] == ' ':
+                self.turn_positions[sell] = 'O'
+                self.turn_counts += 1
 
-
-
-
+        else:
+            print('Играют: XXX')
+            sell = int(input())
+            if 0<sell<9 and self.turn_positions[sell] == ' ':
+                self.turn_positions[sell] = 'X'
+                self.turn_counts += 1
 
     def field_print(self, a=turn_positions):
         print('''
 		   ___________
-		  |   |   |   |
+		  |0  |1  |2  |
 		  | {} | {} | {} |
 		  |___|___|___|
-		  |   |   |   |
+		  |3  |4  |5  |
 		  | {} | {} | {} |
 		  |___|___|___|
-		  |   |   |   |
+		  |6  |7  |8  |
 		  | {} | {} | {} |
 		  |___|___|___|		  
 						'''.format(a[0], a[1], a[2],
@@ -50,5 +61,14 @@ class Field(object):
                                    a[6], a[7], a[8]))
 
 
-x = Field()
-x.field_print()
+
+def main():
+    x = Field()
+    x.field_print()
+    print('Играем в крестики нолики. Для хода введите номер клетки.')
+    while x.is_game_finished()[1] == False:
+        x.make_turn()
+        x.field_print()
+    print(x.is_game_finished()[0])
+
+main()
