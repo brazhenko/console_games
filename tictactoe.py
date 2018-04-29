@@ -41,7 +41,7 @@ class Field(object):
         else:
             print('Играют: XXX')
             sell = int(input())
-            if 0<sell<9 and self.turn_positions[sell] == ' ':
+            if 0<=sell<9 and self.turn_positions[sell] == ' ':
                 self.turn_positions[sell] = 'X'
                 self.turn_counts += 1
 
@@ -70,8 +70,9 @@ def main():
     x.field_print()
     print('Играем в крестики нолики. Для хода введите номер клетки.')
     while x.is_game_finished()[1] == False:
+        print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         x.make_turn()
         x.field_print()
     print(x.is_game_finished()[0])
-
+    input('Игра закончена. Нажмите любую клавишу для выхода')
 main()
